@@ -1,38 +1,267 @@
-.App {
+/* .App {
   text-align: center;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
+} */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+
+.main-title {
+
+  min-height: 5vh;
+
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
+/* .App-link {
   color: #61dafb;
+} */
+
+
+.main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+  width: 100vw;
+
+}
+.main-home{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  width: 100vw;
+
+}
+.home-btns{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 80vw;
+  margin-top: 2em;
+  
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar-area{
+  background-color: #282c34;
+  display:flex;
+  justify-content: start;
+  align-items: center;
+  width:100vw;
+  height:10vh;
+  border-bottom: white 2px solid;
+
+
+  color:white;
+  /* background-color: white; */
 }
+.navLinks{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin:0 5%;
+  
+}
+.navLinks li{
+
+  list-style-type: none;
+  color: white;
+}
+.default-btn{
+  width: auto;
+  height: auto;
+  /* background-color:#423ED8 ; */
+  border-radius: 8px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  width: 6vw;
+  
+}
+.default-btn p{
+  padding:2% 20%;
+}
+
+.card-List{
+  height: 90%;
+  /* overflow:auto; */
+  margin-bottom: 1em;
+}
+
+.card{
+
+  width: 400px;
+  height:200px;
+  padding: 1em;
+  margin: 0.5em;
+  background-color: white;
+  box-shadow: 6px grey;
+  border-radius: 16px;
+  color:black;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+.card h4{
+  font-size: large;
+
+}
+.card p{
+  font-size: small;
+}
+.card-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ 
+}
+.card-footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: grey;
+
+}
+.card-actions{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-right: 2em; */
+  /* padding: 2em; */
+}
+.card-actions div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-right: 2em; */
+  padding:0 8px;
+}
+
+.card-actions p{
+  padding:0 8px;
+}
+
+ol{
+  list-style-type:none;
+  display:grid;
+  grid-template-columns:400px 400px 400px;
+  column-gap: 3em;
+ 
+}
+.form-area{
+  height: 100%;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  
+
+}
+form{
+  height:50%;
+  width: 100%;
+  /* border:white 1px solid; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+}
+form label {
+  width: 60%;
+  padding: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.form textarea{
+  width: 100%;
+}
+.form input{
+  padding: 1em;
+  margin-top:1em;
+  border-radius: 0.5em;
+  font-size: 1em;
+}
+.form textarea{
+  padding: 1em;
+  margin-top:1em;
+  border-radius: 0.5em;
+}
+.submit-btn input{
+  background-color: green;
+  border:none;
+  color:white;
+  width:100%;
+}
+.detailCard-main{
+  height:90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 5vh;
+}
+.detailCard{
+
+  width: 40vw;
+  height:60vh;
+  padding: 2em;
+  /* margin: 1em; */
+  background-color: white;
+  box-shadow: 6px grey;
+  border-radius: 16px;
+  color:black;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+.detailCard-action-edit{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+ 
+ 
+}
+.detailCard-actions{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-right: 2em; */
+  /* padding: 2em; */
+}
+
+
+
+.divider-top{
+  margin-top: 1em;
+  height:1px;
+  width: 100%;
+  background-color: #c9c4c4;
+}
+
+.detailCard-footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: grey;
+
+}
+
+
