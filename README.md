@@ -37,7 +37,7 @@ This app should also serve as a good example to understand working with state,pr
 ## Installation
 1. Clone the repository
 ```bash
-git clone
+git clone https://github.com/koirpraw/frontend-notes-app-react.git
 ```
 2. Install the dependencies
 ```bash
