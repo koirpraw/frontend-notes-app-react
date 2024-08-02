@@ -19,37 +19,6 @@ function CardDetailPage() {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    // const [likeToggle, setLikeToggle] = useState()
-
-
-
-    async function getCardByID(docId) {
-        // const id = params._id.toString();
-
-        try {
-            const res = await fetch(`http://localhost:4000/api/notes/${id}`)
-            if (!res.ok) {
-                throw new Error(`Http Error,couldnot fetchdata,${Error}`)
-            }
-            const data = await res.json();
-            console.log(data);
-            setflashcard(data);
-        } catch (error) {
-            setError(error)
-            console.log('HTTP Error', error)
-        } finally {
-            setLoading(false)
-
-        }
-    }
-
-    useEffect(() => {
-        if (!card) {
-            getCardByID(id);
-        } else {
-            setLoading(false);
-        }
-    }, [id, card]);
 
 
     const deleteCard = async () => {
@@ -81,7 +50,7 @@ function CardDetailPage() {
         try {
             const response = await fetch(`http://localhost:4000/api/notes/${id}`,
                 {
-                    method: 'PATCH',
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -96,7 +65,6 @@ function CardDetailPage() {
             console.error(`HTTP error,`, error)
 
         }
-        // 
 
     }
 

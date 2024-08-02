@@ -9,19 +9,17 @@ This app should also serve as a good example to understand working with state,pr
 - Read a single note
 - Update a note
 - Delete a note
-- Like a note
+- Like/Dislike a note
+- React Hooks
+- React Routers
+- Routing and Navigation
+- Fetch API
+- Error Handling
+- Managing state
+- Stateful Routing( Router Based State Management)
 - Filter notes based on difficulty **(Coming Soon)**
 - Sort notes based on created_at field **(Coming Soon)**
 - Search notes based on title **(Coming Soon)**
-- Routing and Navigation
-- Passing data between components
-- Managing state
-- Error Handling
-- Loading States
-- Fetch API
-- CRUD operations
-- React Hooks
-- React Routers
 - pagination **(Future update)**
   
 

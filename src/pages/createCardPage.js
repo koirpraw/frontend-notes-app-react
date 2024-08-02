@@ -7,9 +7,9 @@ import DefaultBtn from '../components/DefaultBtn';
 function CreateCard() {
 
     const [form, setForm] = useState({
-        term: "",
-        definition: "",
-        difficulty: 0
+        title: "",
+        description: "",
+        difficulty: 1
     })
 
     function updateForm(value) {
@@ -41,7 +41,7 @@ function CreateCard() {
     async function onSubmit(e) {
         e.preventDefault();
         addCard();
-        setForm({ term: "", definition: "", difficulty: 0 })
+        setForm({ title: "", description: "", difficulty: 0 })
         navigate('/')
     }
     return (
@@ -55,9 +55,9 @@ function CreateCard() {
                         Title:
                         <input
                             type="text"
-                            name="term"
-                            id='term'
-                            onChange={(e) => updateForm({ term: e.target.value })}
+                            name="title"
+                            id='title'
+                            onChange={(e) => updateForm({ title: e.target.value })}
                         />
                     </label>
                     <br />
@@ -65,10 +65,10 @@ function CreateCard() {
                         Description:
                         <textarea
                             type="text"
-                            name="definition"
-                            id='definition'
+                            name="description"
+                            id='description'
                             rows={10}
-                            onChange={(e) => updateForm({ definition: e.target.value })}
+                            onChange={(e) => updateForm({ description: e.target.value })}
                         />
                     </label>
                     <br />

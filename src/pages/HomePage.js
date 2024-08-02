@@ -72,12 +72,12 @@ function HomePage() {
                 <div className='card-List'>
                     <ol>
                         {flashCards && flashCards.map((card) => (
-                            <li key={card._id} >
+                            <li key={card.id} >
                                 {/* _id for MongoDB nomenclature of primary id */}
                                 {/* <li key={card._id}> */}
 
                                 <Link
-                                    to={`/CardDetailPage/${card._id}`}
+                                    to={`/CardDetailPage/${card.id}`}
                                     state={{ card }}
                                     style={{ textDecoration: 'none' }}
                                 >

@@ -29,39 +29,6 @@ function EditCard() {
     }
 
 
-
-    async function getCardByID(docId) {
-        // const id = params._id.toString();
-
-        try {
-            // const res = await fetch(`http://localhost:4001/flashcards/${id}`)
-            const res = await fetch(`http://localhost:4000/api/notes/${id}`)
-            if (!res.ok) {
-                throw new Error(`Http Error,couldnot fetchdata,${Error}`)
-            }
-            const data = await res.json();
-            console.log(data);
-            setForm(data);
-            setLikeToggle(data.is_liked)
-            console.log(`title:${form.title} is_liked:${form.is_liked}`)
-
-
-        } catch (error) {
-            console.log('HTTP Error', error)
-        }
-
-    }
-
-    useEffect(() => {
-        async function fetchData() {
-            const card = await getCardByID(id);
-        }
-
-        fetchData();
-        console.log(`title= ${form.title} description=${form.description}`)
-
-    }, [id])
-
     function updateForm
         (value) {
         return setForm
@@ -85,8 +52,8 @@ function EditCard() {
         try {
             const response = await fetch(`http://localhost:4000/api/notes/${id}`,
                 {
-                    method: "PATCH",
-                    // method: "PUT",
+                    // method: "PATCH",
+                    method: "PUT",
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -126,9 +93,6 @@ function EditCard() {
 
 
 
-    // const checkStatus = form.is_liked === true ?? 'checked'
-
-
     return (
         <>
             <div className='form-area'>
@@ -142,7 +106,6 @@ function EditCard() {
                             name="title"
                             id='title'
                             value={form.title}
-                            // value={entry.title}
                             onChange={(e) => updateForm({ title: e.target.value })}
 
                         />
@@ -163,8 +126,6 @@ function EditCard() {
                         <label>
                             <p>Favorite :</p>
                         </label>
-
-                        {/* {form.is_liked === false ? <RiCheckboxBlankCircleLine onClick={handleLikeToggle} /> : <RiCheckboxCircleFill onClick={handleLikeToggle} />} */}
                         <input type='checkbox' checked={likeToggle} onChange={handleLikeToggle} size='1em' />
                     </div>
                     <div style={{ width: '60%' }}>
@@ -183,9 +144,6 @@ function EditCard() {
                 </form>
 
             </div>
-            {/* <div className='submit-btn'>
-                <Link to='/'><input type="submit" value="Home" /></Link>
-            </div> */}
             <div>
                 <DefaultBtn route={`/CardDetailPage/${id}`} title={'Back'} bgColor={'grey'} />
 
