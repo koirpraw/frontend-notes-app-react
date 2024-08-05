@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router'
 import DefaultBtn from '../components/DefaultBtn';
 import { NoteContext } from '../contexts/NoteContext';
-import { fetchNotes } from '../services/apiService';
+import { fetchNotes, deleteAllNotes } from '../services/apiService';
 
 
 function DeleteDialog({ deleteMethod }) {
@@ -40,23 +40,17 @@ function HomePage() {
         fetchData();
 
     }, []);
-
     const handleCardClick = (card) => {
         setSelectedNote(card);
     };
-
     const deleteAll = async () => {
         try {
-            const response = await fetch("http://localhost:4000/api/notes", { method: 'DELETE' })
-            if (!response.ok) {
-                throw new Error(`HTTP Error,status=${response.status}`)
-            }
-
+            await deleteAllNotes();
+            fetchData();
         } catch (error) {
-            console.log('Error Deleting all Cards', error)
+            console.error('Error Deleting all Cards', error)
 
         }
-        navigate('/')
     }
 
     return (

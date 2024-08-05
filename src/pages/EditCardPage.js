@@ -4,15 +4,14 @@ import { useParams, useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import DefaultBtn from '../components/DefaultBtn';
 import { NoteContext } from '../contexts/NoteContext'
+import { fetchNotes, updateNote } from '../services/apiService';
 
 
 function EditCard() {
     const { id } = useParams();
     const navigate = useNavigate();
-    // const location = useLocation();
-    // const { flashcard } = location.state || {};
 
-    const { selectedNote, setNotes } = useContext(NoteContext);
+    const { selectedNote } = useContext(NoteContext);
 
     const [form, setForm] = useState(selectedNote || {});
     console.log(`title:${form.title},is_liked:${form.is_liked}`)
@@ -33,7 +32,6 @@ function EditCard() {
     }
 
 
-
     const editedCard = {
         title: form.title,
         description: form.description,
@@ -42,41 +40,19 @@ function EditCard() {
 
     }
 
-    async function editCardByID(docId) {
-
+    const editNoteByID = async (id) => {
         try {
-            const response = await fetch(`http://localhost:4000/api/notes/${id}`,
-                {
-                    // method: "PATCH",
-                    method: "PUT",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(editedCard)
-
-                },
-                console.log(`title:${form.title} is_liked:${form.is_liked} difficulty:${form.difficulty}`)
-
-
-            )
-            if (!response.ok) {
-                throw new Error(`Http Error,could not edit data${Error}`)
-            }
-            const data = await response.json();
-            console.log(data);
-
-
+            await updateNote(id, editedCard);
         } catch (error) {
-            console.error('HTTP data Editing Error', error)
 
         }
-
     }
+
 
     async function onSubmit(e) {
         e.preventDefault();
         try {
-            await editCardByID(id);
+            await editNoteByID(id);
             navigate('/HomePage')
 
         } catch (error) {
@@ -85,8 +61,6 @@ function EditCard() {
         }
 
     }
-
-
 
     return (
         <>
@@ -130,7 +104,6 @@ function EditCard() {
                         </label>
 
                     </div>
-
 
                     <br />
                     <div className='submit-btn'>

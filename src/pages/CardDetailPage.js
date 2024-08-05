@@ -4,7 +4,7 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { PiPen, PiTrash, PiStarFill } from 'react-icons/pi'
 import { NoteContext } from '../contexts/NoteContext'
-import { deleteNote } from '../services/apiService';
+import { deleteNote, updateNote } from '../services/apiService';
 
 
 
@@ -18,25 +18,6 @@ function CardDetailPage() {
     const navigate = useNavigate();
 
 
-
-    // const deleteCard = async () => {
-    //     try {
-    //         const response = await fetch(
-    //             // `http://localhost:4001/flashcards/${id}`,
-    //             `http://localhost:4000/api/notes/${selectedNote.id}`,
-    //             { method: 'DELETE' })
-    //         if (!response.ok) {
-    //             throw new Error(`HTTP error, status = ${response.status}`);
-
-    //         }
-
-    //     } catch (error) {
-    //         console.error('HTTP Error:', error);
-    //     }
-    //     navigate("/HomePage")
-
-
-    // }
     const deleteCard = async () => {
         try {
             await deleteNote(selectedNote.id);
@@ -46,33 +27,45 @@ function CardDetailPage() {
         }
     }
 
-
-
-    async function updateLike() {
+    const updateLike = async () => {
         const updatedCard = {
             ...selectedNote, is_liked: !selectedNote.is_liked
         }
-
         try {
-            const response = await fetch(`http://localhost:4000/api/notes/${id}`,
-                {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(updatedCard)
-                })
-            if (!response.ok) {
-                throw new Error(`HTTP error,ststus = ${response.status}`)
-            }
+            await updateNote(selectedNote.id, updatedCard);
             setSelectedNote(updatedCard);
 
         } catch (error) {
-            console.error(`HTTP error,`, error)
+            console.error('Error Updating Like:', error)
 
         }
-
     }
+
+    // async function updateLike() {
+    //     const updatedCard = {
+    //         ...selectedNote, is_liked: !selectedNote.is_liked
+    //     }
+
+    //     try {
+    //         const response = await fetch(`http://localhost:4000/api/notes/${id}`,
+    //             {
+    //                 method: 'PUT',
+    //                 headers: {
+    //                     'Content-Type': 'application/json'
+    //                 },
+    //                 body: JSON.stringify(updatedCard)
+    //             })
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error,ststus = ${response.status}`)
+    //         }
+    //         setSelectedNote(updatedCard);
+
+    //     } catch (error) {
+    //         console.error(`HTTP error,`, error)
+
+    //     }
+
+    // }
     if (!selectedNote) {
         return <div>Card Not Found !</div>
     }

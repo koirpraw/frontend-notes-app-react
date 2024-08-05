@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
 import DefaultBtn from '../components/DefaultBtn';
+import { createNote } from '../services/apiService';
 
 function CreateCard() {
 
@@ -22,25 +22,19 @@ function CreateCard() {
 
     const navigate = useNavigate();
 
-    const addCard = async () => {
-        fetch(
-            // "http://localhost:4001/flashcards", 
-            "http://localhost:4000/api/notes",
-            {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(newCard)
-            }
-
-        )
+    const addNote = async () => {
+        try {
+            await createNote(newCard);
+        } catch (error) {
+            console.error('Error creating Note:', error);
+            throw error;
+        }
 
     }
 
     async function onSubmit(e) {
         e.preventDefault();
-        addCard();
+        addNote()
         setForm({ title: "", description: "", difficulty: 0 })
         navigate('/')
     }
