@@ -1,10 +1,12 @@
 import React from 'react'
 import Card from '../components/card'
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 // import { Link } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router'
 import DefaultBtn from '../components/DefaultBtn';
+import { NoteContext } from '../contexts/NoteContext';
+import { fetchNotes } from '../services/apiService';
 
 
 function DeleteDialog({ deleteMethod }) {
@@ -22,29 +24,26 @@ function DeleteDialog({ deleteMethod }) {
 
 function HomePage() {
     const navigate = useNavigate();
-    const [flashCards, setflashCards] = useState([]);
+    const { notes, setNotes, setSelectedNote } = useContext(NoteContext);
+
 
     const fetchData = async () => {
         try {
-            // const response = await fetch('http://localhost:4001/flashcards');
-            const response = await fetch('http://localhost:4000/api/notes');
-            if (!response.ok) {
-                throw new Error(`HTTP Error: status${response.status}`)
-            }
-            const data = await response.json();
-            // console.log(data);
-            setflashCards(data)
-
+            const data = await fetchNotes();
+            setNotes(data);
         } catch (error) {
-            console.error('Error:', error)
-
+            console.error('Error fetching data:', error);
         }
-    };
+    }
 
     useEffect(() => {
-
         fetchData();
-    }, [])
+
+    }, []);
+
+    const handleCardClick = (card) => {
+        setSelectedNote(card);
+    };
 
     const deleteAll = async () => {
         try {
@@ -71,14 +70,16 @@ function HomePage() {
                 </header>
                 <div className='card-List'>
                     <ol>
-                        {flashCards && flashCards.map((card) => (
+
+                        {notes && notes.map((card) => (
                             <li key={card.id} >
                                 {/* _id for MongoDB nomenclature of primary id */}
                                 {/* <li key={card._id}> */}
 
                                 <Link
                                     to={`/CardDetailPage/${card.id}`}
-                                    state={{ card }}
+                                    onClick={() => handleCardClick(card)}
+                                    // state={{ card }}
                                     style={{ textDecoration: 'none' }}
                                 >
 
@@ -95,6 +96,8 @@ function HomePage() {
                                 </Link>
 
                             </li>
+
+
                         ))}
                     </ol>
                     <div className='home-btns'>

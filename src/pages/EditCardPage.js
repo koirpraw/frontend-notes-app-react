@@ -1,25 +1,20 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import DefaultBtn from '../components/DefaultBtn';
+import { NoteContext } from '../contexts/NoteContext'
 
 
 function EditCard() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const location = useLocation();
-    const { flashcard } = location.state || {};
+    // const location = useLocation();
+    // const { flashcard } = location.state || {};
 
+    const { selectedNote, setNotes } = useContext(NoteContext);
 
-    // const [form, setForm] = useState({
-    //     title: "",
-    //     description: "",
-    //     difficulty: 1,
-    //     is_liked: false
-    // })
-    console.log(id);
-    const [form, setForm] = useState(flashcard || {});
+    const [form, setForm] = useState(selectedNote || {});
     console.log(`title:${form.title},is_liked:${form.is_liked}`)
 
     const [likeToggle, setLikeToggle] = useState(form.is_liked);

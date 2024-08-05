@@ -1,8 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { PiPen, PiTrash, PiStarFill } from 'react-icons/pi'
+import { NoteContext } from '../contexts/NoteContext'
+import { deleteNote } from '../services/apiService';
 
 
 
@@ -10,41 +12,45 @@ import { PiPen, PiTrash, PiStarFill } from 'react-icons/pi'
 function CardDetailPage() {
 
     const { id } = useParams();
-    const location = useLocation();
+    const { selectedNote, setSelectedNote } = useContext(NoteContext);
 
-    const { card } = location.state || {};
-    const [flashcard, setflashcard] = useState(card || {});
 
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
 
 
+    // const deleteCard = async () => {
+    //     try {
+    //         const response = await fetch(
+    //             // `http://localhost:4001/flashcards/${id}`,
+    //             `http://localhost:4000/api/notes/${selectedNote.id}`,
+    //             { method: 'DELETE' })
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error, status = ${response.status}`);
+
+    //         }
+
+    //     } catch (error) {
+    //         console.error('HTTP Error:', error);
+    //     }
+    //     navigate("/HomePage")
+
+
+    // }
     const deleteCard = async () => {
         try {
-            const response = await fetch(
-                // `http://localhost:4001/flashcards/${id}`,
-                `http://localhost:4000/api/notes/${id}`,
-                { method: 'DELETE' })
-            if (!response.ok) {
-                throw new Error(`HTTP error, status = ${response.status}`);
-
-            }
-
+            await deleteNote(selectedNote.id);
+            navigate('/')
         } catch (error) {
-            console.error('HTTP Error:', error);
+            console.error('Error Deleting Card:', error)
         }
-        navigate("/HomePage")
-
-
     }
 
 
 
     async function updateLike() {
         const updatedCard = {
-            ...flashcard, is_liked: !flashcard.is_liked
+            ...selectedNote, is_liked: !selectedNote.is_liked
         }
 
         try {
@@ -59,13 +65,16 @@ function CardDetailPage() {
             if (!response.ok) {
                 throw new Error(`HTTP error,ststus = ${response.status}`)
             }
-            setflashcard(updatedCard);
+            setSelectedNote(updatedCard);
 
         } catch (error) {
             console.error(`HTTP error,`, error)
 
         }
 
+    }
+    if (!selectedNote) {
+        return <div>Card Not Found !</div>
     }
 
     return (
@@ -76,7 +85,7 @@ function CardDetailPage() {
                         <div className='detailCard-header'>
                             <div className='detailCard-actions'>
                                 <div className='detailCard-action-like' >
-                                    <PiStarFill color={flashcard.is_liked === true ? 'red' : '#d9d9d9'} size={flashcard.is_liked === true ? 48 : 36} title='Like' onClick={updateLike} />
+                                    <PiStarFill color={selectedNote.is_liked === true ? 'red' : '#d9d9d9'} size={selectedNote.is_liked === true ? 48 : 36} title='Like' onClick={updateLike} />
                                     {/* {flashcard.is_liked === 'true' ? <FaStar size={32} title='UnLike' color='red' /> : <FaStar size={24} title='Like' color='grey' />} */}
                                 </div>
                                 <div>
@@ -88,7 +97,7 @@ function CardDetailPage() {
                                     <PiTrash color='red' onClick={deleteCard} size={36} title='Delete' style={{ paddingRight: '1em' }} />
                                     <div><Link color='blue'
                                         to={{ pathname: `/EditCard/${id}` }}
-                                        state={{ flashcard }}
+                                    // state={{ flashcard }}
                                     ><PiPen size={36} title='Edit' /></Link></div>
                                 </div>
 
@@ -97,15 +106,15 @@ function CardDetailPage() {
                         <div className='divider-top' />
 
                         <div className='cardbody'>
-                            <h4>{flashcard.title}</h4>
+                            <h4>{selectedNote.title}</h4>
 
-                            <p>{flashcard.description}</p>
+                            <p>{selectedNote.description}</p>
 
                         </div>
                     </div>
 
                     <div className='detailCard-footer'>
-                        <p>Created at: {flashcard.created_at}</p>
+                        <p>Created at: {selectedNote.created_at}</p>
                     </div>
 
 
@@ -116,10 +125,6 @@ function CardDetailPage() {
 
 
             </div>
-            {/* <div className='submit-btn'>
-                <Link to='/'><input type="submit" value="back" /></Link>
-            </div> */}
-            {/* <DefaultBtn route={'/'} title={'Back'} bgColor={'grey'} /> */}
 
 
         </>
