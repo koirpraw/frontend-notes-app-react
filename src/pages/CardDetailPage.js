@@ -25,7 +25,7 @@ function CardDetailPage() {
         try {
             const response = await fetch(
                 // `http://localhost:4001/selectedNotes/${id}`,
-                `http://localhost:4000/api/selectedNotes/${id}`,
+                `http://localhost:4000/api/notes/${selectedNote.id}`,
                 { method: 'DELETE' })
             if (!response.ok) {
                 throw new Error(`HTTP error, status = ${response.status}`);
@@ -48,7 +48,8 @@ function CardDetailPage() {
         }
 
         try {
-            const response = await fetch(`http://localhost:4000/api/selectedNotes/${id}`,
+            const response = await fetch(`http://localhost:4000/api/notes/${selectedNote.id}`,
+                console.log(`selectedNote.id:${selectedNote.id}`),
                 {
                     method: 'PUT',
                     headers: {
@@ -60,6 +61,7 @@ function CardDetailPage() {
                 throw new Error(`HTTP error,ststus = ${response.status}`)
             }
             setSelectedNote(updatedCard);
+
 
         } catch (error) {
             console.error(`HTTP error,`, error)
@@ -97,6 +99,7 @@ function CardDetailPage() {
                         <div className='divider-top' />
 
                         <div className='cardbody'>
+                            {/* <h4>{selectedNote.title}</h4> */}
                             <h4>{selectedNote.title}</h4>
 
                             <p>{selectedNote.description}</p>

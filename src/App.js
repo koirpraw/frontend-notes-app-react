@@ -32,8 +32,6 @@ function App() {
       <div className='main'>
         <Navbar />
 
-        {/* <HomePage /> */}
-
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/HomePage' element={<HomePage />} />
