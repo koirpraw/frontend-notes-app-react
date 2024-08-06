@@ -9,7 +9,7 @@ function EditCard() {
     const { id } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
-    const { flashcard } = location.state || {};
+    const { selectedNote } = location.state || {};
 
 
     // const [form, setForm] = useState({
@@ -19,7 +19,7 @@ function EditCard() {
     //     is_liked: false
     // })
     console.log(id);
-    const [form, setForm] = useState(flashcard || {});
+    const [form, setForm] = useState(selectedNote || {});
     console.log(`title:${form.title},is_liked:${form.is_liked}`)
 
     const [likeToggle, setLikeToggle] = useState(form.is_liked);

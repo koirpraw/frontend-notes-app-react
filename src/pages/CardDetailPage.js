@@ -12,11 +12,11 @@ function CardDetailPage() {
     const { id } = useParams();
     const location = useLocation();
 
-    const { card } = location.state || {};
-    const [flashcard, setflashcard] = useState(card || {});
+    const { note } = location.state || {};
+    const [selectedNote, setSelectedNote] = useState(note || {});
 
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
     const navigate = useNavigate();
 
 
@@ -24,8 +24,8 @@ function CardDetailPage() {
     const deleteCard = async () => {
         try {
             const response = await fetch(
-                // `http://localhost:4001/flashcards/${id}`,
-                `http://localhost:4000/api/notes/${id}`,
+                // `http://localhost:4001/selectedNotes/${id}`,
+                `http://localhost:4000/api/selectedNotes/${id}`,
                 { method: 'DELETE' })
             if (!response.ok) {
                 throw new Error(`HTTP error, status = ${response.status}`);
@@ -44,11 +44,11 @@ function CardDetailPage() {
 
     async function updateLike() {
         const updatedCard = {
-            ...flashcard, is_liked: !flashcard.is_liked
+            ...selectedNote, is_liked: !selectedNote.is_liked
         }
 
         try {
-            const response = await fetch(`http://localhost:4000/api/notes/${id}`,
+            const response = await fetch(`http://localhost:4000/api/selectedNotes/${id}`,
                 {
                     method: 'PUT',
                     headers: {
@@ -59,7 +59,7 @@ function CardDetailPage() {
             if (!response.ok) {
                 throw new Error(`HTTP error,ststus = ${response.status}`)
             }
-            setflashcard(updatedCard);
+            setSelectedNote(updatedCard);
 
         } catch (error) {
             console.error(`HTTP error,`, error)
@@ -76,11 +76,11 @@ function CardDetailPage() {
                         <div className='detailCard-header'>
                             <div className='detailCard-actions'>
                                 <div className='detailCard-action-like' >
-                                    <PiStarFill color={flashcard.is_liked === true ? 'red' : '#d9d9d9'} size={flashcard.is_liked === true ? 48 : 36} title='Like' onClick={updateLike} />
-                                    {/* {flashcard.is_liked === 'true' ? <FaStar size={32} title='UnLike' color='red' /> : <FaStar size={24} title='Like' color='grey' />} */}
+                                    <PiStarFill color={selectedNote.is_liked === true ? 'red' : '#d9d9d9'} size={selectedNote.is_liked === true ? 48 : 36} title='Like' onClick={updateLike} />
+                                    {/* {selectedNote.is_liked === 'true' ? <FaStar size={32} title='UnLike' color='red' /> : <FaStar size={24} title='Like' color='grey' />} */}
                                 </div>
                                 <div>
-                                    {/* <p>Difficulty Level: {flashcard.difficulty}</p> */}
+                                    {/* <p>Difficulty Level: {selectedNote.difficulty}</p> */}
 
                                 </div>
                                 <div className='detailCard-action-edit'>
@@ -88,7 +88,7 @@ function CardDetailPage() {
                                     <PiTrash color='red' onClick={deleteCard} size={36} title='Delete' style={{ paddingRight: '1em' }} />
                                     <div><Link color='blue'
                                         to={{ pathname: `/EditCard/${id}` }}
-                                        state={{ flashcard }}
+                                        state={{ selectedNote }}
                                     ><PiPen size={36} title='Edit' /></Link></div>
                                 </div>
 
@@ -97,15 +97,15 @@ function CardDetailPage() {
                         <div className='divider-top' />
 
                         <div className='cardbody'>
-                            <h4>{flashcard.title}</h4>
+                            <h4>{selectedNote.title}</h4>
 
-                            <p>{flashcard.description}</p>
+                            <p>{selectedNote.description}</p>
 
                         </div>
                     </div>
 
                     <div className='detailCard-footer'>
-                        <p>Created at: {flashcard.created_at}</p>
+                        <p>Created at: {selectedNote.created_at}</p>
                     </div>
 
 

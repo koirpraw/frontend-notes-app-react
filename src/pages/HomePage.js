@@ -22,18 +22,18 @@ function DeleteDialog({ deleteMethod }) {
 
 function HomePage() {
     const navigate = useNavigate();
-    const [flashCards, setflashCards] = useState([]);
+    const [notes, setNotes] = useState([]);
 
     const fetchData = async () => {
         try {
-            // const response = await fetch('http://localhost:4001/flashcards');
+            // const response = await fetch('http://localhost:4001/notes');
             const response = await fetch('http://localhost:4000/api/notes');
             if (!response.ok) {
                 throw new Error(`HTTP Error: status${response.status}`)
             }
             const data = await response.json();
             // console.log(data);
-            setflashCards(data)
+            setNotes(data)
 
         } catch (error) {
             console.error('Error:', error)
@@ -71,23 +71,23 @@ function HomePage() {
                 </header>
                 <div className='card-List'>
                     <ol>
-                        {flashCards && flashCards.map((card) => (
-                            <li key={card.id} >
+                        {notes && notes.map((note) => (
+                            <li key={note.id} >
                                 {/* _id for MongoDB nomenclature of primary id */}
-                                {/* <li key={card._id}> */}
+                                {/* <li key={note._id}> */}
 
                                 <Link
-                                    to={`/CardDetailPage/${card.id}`}
-                                    state={{ card }}
+                                    to={`/CardDetailPage/${note.id}`}
+                                    state={{ note }}
                                     style={{ textDecoration: 'none' }}
                                 >
 
                                     <Card
-                                        difficulty={card.difficulty}
-                                        title={card.title}
-                                        description={card.description}
-                                        created_at={card.created_at}
-                                        likeColor={card.is_liked === true ? 'red' : '#d9d9d9'}
+                                        difficulty={note.difficulty}
+                                        title={note.title}
+                                        description={note.description}
+                                        created_at={note.created_at}
+                                        likeColor={note.is_liked === true ? 'red' : '#d9d9d9'}
                                         // iconSize={card.is_liked === true ? 40 : 36}
                                         iconSize={36}
                                     />
