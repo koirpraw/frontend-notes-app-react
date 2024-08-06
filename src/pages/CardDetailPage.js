@@ -41,31 +41,6 @@ function CardDetailPage() {
         }
     }
 
-    // async function updateLike() {
-    //     const updatedCard = {
-    //         ...selectedNote, is_liked: !selectedNote.is_liked
-    //     }
-
-    //     try {
-    //         const response = await fetch(`http://localhost:4000/api/notes/${id}`,
-    //             {
-    //                 method: 'PUT',
-    //                 headers: {
-    //                     'Content-Type': 'application/json'
-    //                 },
-    //                 body: JSON.stringify(updatedCard)
-    //             })
-    //         if (!response.ok) {
-    //             throw new Error(`HTTP error,ststus = ${response.status}`)
-    //         }
-    //         setSelectedNote(updatedCard);
-
-    //     } catch (error) {
-    //         console.error(`HTTP error,`, error)
-
-    //     }
-
-    // }
     if (!selectedNote) {
         return <div>Card Not Found !</div>
     }
