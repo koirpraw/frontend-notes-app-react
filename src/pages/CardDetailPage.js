@@ -64,7 +64,7 @@ function CardDetailPage() {
                                     {/* <div><input type='button' value="Delete" onClick={deleteCard} /></div> */}
                                     <PiTrash color='red' onClick={deleteCard} size={36} title='Delete' style={{ paddingRight: '1em' }} />
                                     <div><Link color='blue'
-                                        to={{ pathname: `/EditCard/${id}` }}
+                                        to={{ pathname: `/EditCard/${selectedNote.id}` }}
                                     // state={{ flashcard }}
                                     ><PiPen size={36} title='Edit' /></Link></div>
                                 </div>

@@ -44,6 +44,7 @@ function EditCard() {
         try {
             await updateNote(id, editedCard);
         } catch (error) {
+            console.error('Error Editing Card:', error)
 
         }
     }
