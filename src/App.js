@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import CreateCard from './pages/createCardPage';
 import Navbar from './components/navbar';
 import HomePage from './pages/HomePage';
-import NoteProvider from './contexts/NoteContext';
+
 
 import React from 'react'
 import CardDetailPage from './pages/CardDetailPage';
@@ -22,16 +22,16 @@ function App() {
       <div className='main'>
         <Navbar />
 
-        {/* <HomePage /> */}
-        <NoteProvider>
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/HomePage' element={<HomePage />} />
-            <Route path='/createCard' element={<CreateCard />} />
-            <Route path='/CardDetailPage/:id' element={<CardDetailPage />} />
-            <Route path="/EditCard/:id" element={<EditCard />} />
-          </Routes>
-        </NoteProvider>
+
+        {/* <NoteProvider> */}
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/HomePage' element={<HomePage />} />
+          <Route path='/createCard' element={<CreateCard />} />
+          <Route path='/CardDetailPage/:id' element={<CardDetailPage />} />
+          <Route path="/EditCard/:id" element={<EditCard />} />
+        </Routes>
+        {/* </NoteProvider> */}
 
 
 

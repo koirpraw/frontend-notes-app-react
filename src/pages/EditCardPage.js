@@ -3,15 +3,17 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import DefaultBtn from '../components/DefaultBtn';
-import { NoteContext } from '../contexts/NoteContext'
+
 import { fetchNotes, updateNote } from '../services/apiService';
+import useStore from '../lib/store';
 
 
 function EditCard() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const { selectedNote } = useContext(NoteContext);
+    // const { selectedNote } = useContext(NoteContext);
+    const { selectedNote } = useStore();
 
     const [form, setForm] = useState(selectedNote || {});
     console.log(`title:${form.title},is_liked:${form.is_liked}`)

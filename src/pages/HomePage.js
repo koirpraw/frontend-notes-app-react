@@ -5,8 +5,9 @@ import { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router'
 import DefaultBtn from '../components/DefaultBtn';
-import { NoteContext } from '../contexts/NoteContext';
+
 import { fetchNotes, deleteAllNotes } from '../services/apiService';
+import useStore from '../lib/store';
 
 
 function DeleteDialog({ deleteMethod }) {
@@ -24,7 +25,8 @@ function DeleteDialog({ deleteMethod }) {
 
 function HomePage() {
     const navigate = useNavigate();
-    const { notes, setNotes, setSelectedNote } = useContext(NoteContext);
+    // const { notes, setNotes, setSelectedNote } = useContext(NoteContext);
+    const { notes, setNotes, setSelectedNote } = useStore();
 
 
     const fetchData = async () => {

@@ -3,8 +3,9 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { PiPen, PiTrash, PiStarFill } from 'react-icons/pi'
-import { NoteContext } from '../contexts/NoteContext'
+
 import { deleteNote, updateNote } from '../services/apiService';
+import useStore from '../lib/store';
 
 
 
@@ -12,7 +13,8 @@ import { deleteNote, updateNote } from '../services/apiService';
 function CardDetailPage() {
 
     const { id } = useParams();
-    const { selectedNote, setSelectedNote } = useContext(NoteContext);
+    // const { selectedNote, setSelectedNote } = useContext(NoteContext);
+    const { selectedNote, setSelectedNote } = useStore();
 
 
     const navigate = useNavigate();
