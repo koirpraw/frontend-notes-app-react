@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '../components/card'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 // import { Link } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router'
@@ -23,6 +23,17 @@ function DeleteDialog({ deleteMethod }) {
 function HomePage() {
     const navigate = useNavigate();
     const [notes, setNotes] = useState([]);
+    // const [notes, setNotes] = useReducer((state, action) => {
+
+    // }, [notes])
+
+    // const [state] = useReducer((state, action) => {
+
+    // }, {
+
+    //     names: [],
+    //     name: ''
+    // });
 
     const fetchData = async () => {
         try {
