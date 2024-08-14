@@ -69,6 +69,7 @@ Context API is the React's built in state management system.It can be used for s
    - selectedNote & setSelectedNote: a single note (initialized to null).
 8. We create a function called fetchNotes that fetches data from the API and set the state of notes to this data.
 9. Using useEffect hook we call fetchNotes when NoteProvider component is mounted. this ensures that fetched notes are available to all the components that requires access to the context.
-10. Wrap all the routes in App.js file with NoteProvider. (if entire app can be wrapped, Wrap the `App` component with provider component in `index.js` file.)
-11. Consumer: In modern React, the useContext hook is often used instead of Consumer for better readability and simplicity. Import useContecxt hook from react in components `cardDetailPage.js` and `editCardPage.js` so that we can access the context in these components.
+10. Note provider component takes a value prop which is an object containing state and functions. In our case we will pass state variable and setter functions as value prop.
+11. Wrap all the routes in App.js file with NoteProvider. (if entire app can be wrapped, Wrap the `App` component with provider component in `index.js` file.)
+12. Consumer: In modern React, the useContext hook is often used instead of Consumer for better readability and simplicity. Import useContecxt hook from react in components `HomePage.js `, `cardDetailPage.js` and `editCardPage.js`. We can access the state and functions from the context using useContext hook.
 
