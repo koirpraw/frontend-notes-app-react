@@ -54,3 +54,19 @@ npm start
 http://localhost:3000/
 ```
 
+## State Management with Context API
+Context API is the React's built in state management system.It can be used for state management for small to medium application.
+
+## Implementation of Context API
+1. Create a new folder called `context` in the `src` folder.
+2. Inside of the context foder, create a file called `NoteContext.js`.
+3. In the `NoteContext.js` file, first import `createContext` module from react.createCongtext is a function that creates a context object.
+4. Create a new context object using `createContext` function and call it `NoteContext`. this NoteContext object will have a provider and a consumer.
+5. A provider is a component that provides the value to the consumer. The value can be anything like a string, number, object or a function.
+6. Create a provider component called `NoteProvider` and pass the children as props.( passing children as props allows us to wrap the children components with the provider component, in our case we are wrapping all the routes in our app with provider as a children. This way all routes that require access to the context will have access to the context)
+7. In the `NoteProvider` component, create a state using `useState` hook. The state will have the following properties:
+   - notes & setNotes: an array of notes (initialized to empty array).
+   - selectedNote & setSelectedNote: a single note (initialized to null).
+8. We create a function called fetchNotes that fetches data from the API and set the state of notes to this data.
+9. Using useEffect hook we call fetchNotes when NoteProvider component is mounted. this ensures that fetched notes are available to all the components that requires access to the context.
+
