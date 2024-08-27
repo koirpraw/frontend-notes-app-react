@@ -12,6 +12,7 @@ import EditCard from './pages/EditCardPage';
 
 
 
+
 function App() {
 
 
@@ -24,6 +25,7 @@ function App() {
 
         {/* <HomePage /> */}
         <NoteProvider>
+
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/HomePage' element={<HomePage />} />
@@ -32,6 +34,7 @@ function App() {
             <Route path="/EditCard/:id" element={<EditCard />} />
           </Routes>
         </NoteProvider>
+
 
 
 
