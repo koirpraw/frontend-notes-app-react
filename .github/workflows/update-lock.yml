@@ -1,0 +1,37 @@
+name: Update npm lockfile
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: 'Commit message override'
+        required: false
+        default: 'chore: update package-lock.json with nanoid override'
+
+jobs:
+  update-lock:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Regenerate lockfile
+        run: npm install --package-lock-only
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "Hermes Agent"
+          git config user.email "koirpraw@gmail.com"
+          git add package-lock.json
+          if git diff --cached --quiet; then
+            echo "No lockfile changes to commit"
+            exit 0
+          fi
+          MESSAGE="${{ github.event.inputs.commit_message }}"
+          git commit -m "$MESSAGE"
+          git push
